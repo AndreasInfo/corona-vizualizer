@@ -1,0 +1,148 @@
+/*START helper classes handy-solutions.de and subdomains*/
+:root {
+  --themeColorRgb: rgb(50, 145, 186);
+  --themeColorRgba: rgba(50, 145, 186, 0.5);
+
+  --blue: #007bff;
+  --indigo: #6610f2;
+  --purple: #6f42c1;
+  --pink: #e83e8c;
+  --red: #dc3545;
+  --orange: #fd7e14;
+  --yellow: #ffc107;
+  --green: #28a745;
+  --teal: #20c997;
+  --cyan: #17a2b8;
+  --white: #fff;
+  --gray: #6c757d;
+  --gray-dark: #343a40;
+  --primary: #007bff;
+  --secondary: #6c757d;
+  --success: #28a745;
+  --info: #17a2b8;
+  --warning: #ffc107;
+  --danger: #dc3545;
+  --light: #f8f9fa;
+  --dark: #343a40;
+}
+
+body,
+html {
+  overflow-x: hidden;
+}
+
+/*https://pixabay.com/de/*/
+#sectionContent {
+  background-image: url(../images/background_dark_new.jpg);
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+}
+
+#myCanvas,
+#myCanvas2 {
+  background: white;
+}
+
+.ptCustom {
+  padding-top: 63px;
+}
+
+.mtCustom {
+  margin-top: 63px;
+}
+
+.roundedImage {
+  border-radius: 50%;
+}
+
+.bgThemeColor {
+  background-color: var(--themeColorRgb);
+}
+
+.seperator1 {
+  height: 5vh;
+  background: #6c757d;
+  background: -webkit-linear-gradient(bottom right, #6c757d 50%, #f8f9fa 50%);
+  background: -moz-linear-gradient(bottom right, #6c757d 50%, #f8f9fa 50%);
+  background: linear-gradient(to top left, #6c757d 50%, #f8f9fa 50%);
+}
+
+.seperator2 {
+  height: 5vh;
+  background: #6c757d;
+  background: -webkit-linear-gradient(top right, #6c757d 50%, #f8f9fa 50%);
+  background: -moz-linear-gradient(top right, #6c757d 50%, #f8f9fa 50%);
+  background: linear-gradient(to bottom left, #6c757d 50%, #f8f9fa 50%);
+}
+
+.fontSize12 {
+  font-size: 12px;
+}
+/*END helper classes handy-solutions.de and subdomains*/
+
+/*START: custom button handy-solutions.de and subdomains*/
+.btn-primary {
+  color: var(--light);
+  background-color: var(--themeColorRgb);
+  border-color: var(--themeColorRgb);
+}
+
+.btn-primary:hover {
+  color: var(--light);
+  background-color: var(--themeColorRgb);
+  border-color: var(--themeColorRgb);
+}
+
+.btn-primary:focus,
+.btn-primary.focus {
+  box-shadow: 0 0 0 0.2rem var(--themeColorRgba);
+}
+
+.btn-primary.disabled,
+.btn-primary:disabled {
+  color: var(--light);
+  background-color: var(--themeColorRgb);
+  border-color: var(--themeColorRgb);
+}
+
+.btn-primary:not(:disabled):not(.disabled):active,
+.btn-primary:not(:disabled):not(.disabled).active,
+.show > .btn-primary.dropdown-toggle {
+  color: var(--light);
+  background-color: var(--themeColorRgb);
+  border-color: var(--themeColorRgb);
+}
+
+.btn-primary:not(:disabled):not(.disabled):active:focus,
+.btn-primary:not(:disabled):not(.disabled).active:focus,
+.show > .btn-primary.dropdown-toggle:focus {
+  box-shadow: 0 0 0 0.2rem var(--themeColorRgba);
+}
+/*END: custom button handy-solutions.de and subdomains*/
+
+/*START general layout handy-solutions.de/corona*/
+.ulCustom {
+  list-style: none;
+}
+
+.fontBgRed {
+  background-color: #ff0000;
+  color: white;
+}
+
+.fontBgOrange {
+  background-color: #ffa500;
+  color: white;
+}
+
+.fontBgGreen {
+  background-color: #32cd32;
+  color: white;
+}
+
+.fontBgGrey {
+  background-color: #d3d3d3;
+  color: white;
+}
+/*END general layout handy-solutions.de/corona*/

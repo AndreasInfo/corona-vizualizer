@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="author" content="Andreas Rimmelspacher">
+	<meta name="description" content="Corona Visualization">
+	<meta name="keywords" content="Corona Visualization">
+	<title>Corona Visualization</title>
+	<link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.min.css">
+	<link rel="stylesheet" href="src/css/corona.css">
+</head>
+
+<body>
+	<div class="container-fluid">
+		<div id="sectionNavigation" class="row bg-dark fixed-top">
+			<div class="col-12">
+				<nav class="navbar navbar-expand-md bg-dark navbar-dark h5">
+					<a class="navbar-brand my-n3 pt-3" href="https://handy-solutions.de">
+						<img class="img-fluid" src="src/logo/logo_v2.1_small.svg" alt="Official handy-solutions logo"
+							style="max-width: 40px; width: 100%; height: auto" />
+					</a>
+					<ul class="navbar-nav">
+					</ul>
+				</nav>
+			</div>
+		</div>
+
+		<div id="sectionContent" class="row bg-light text-light mtCustom">
+			<div class="col-sm-12">
+				<div class="text-center py-5">
+					<h1>Corona Visualizer (aka Exponential Growth)</h1>
+				</div>
+
+				<p>Note: Since the Coronavirus (aka COVID-19) is everywhere, our goal was to visualize the exponential
+					growth. This is NEITHER an official thing NOR is it an illustration of reality. Our goal was to give
+					as much as freedom degrees as possible. Please note the following comments and default settings:</p>
+				<ul>
+					<li>Please note the following units and abbreviations:
+						<ul>
+							<li>Height <span class="font-weight-bold">h</span> in px or m</li>
+							<li>Width <span class="font-weight-bold">w</span> in px or m</li>
+							<li>Area <span class="font-weight-bold">a</span> = (h*w) in px or km<sup>2</sup></li>
+							<li>Population <span class="font-weight-bold">p</span> in px or people
+							<li>Density <span class="font-weight-bold">d</span> = (p/a) in px/px<sup>2</sup> or
+								people/km<sup>2</sup>. The population number decides the density. Famous cities are e.g.
+								Hamburg = 2400 people/km<sup>2</sup>, Barcelona = 16000 people/km<sup>2</sup>
+								or New York City = 27000 people/km<sup>2</sup>
+							</li>
+							<li>Infection rate <span class="font-weight-bold">ir </span> in infects every x person who
+								gets in touch with. If the person is already infected, the counter resets itself either
+								way to zero
+							</li>
+							<li>Speed <span class="font-weight-bold">v </span> controls the beat. It does not have any
+								influence on the function</li>
+							<li>Time <span class="font-weight-bold">t </span> controls the number of steps performing
+							</li>
+							<li>Steps <span class="font-weight-bold">s </span> gives a random constant radius of
+								movement for each dot for each step. That means each dot will move different
+								between -1 and s to 1 and s in each direction on the x- and y-axis. If it's going out of
+								bounds, it enters the opposite site again
+							</li>
+							<li>If <span class="font-weight-bold">fixed movement </span> is activated, each dot will
+								have the same radius between -s and -s</li>
+							<li>If <span class="font-weight-bold">booster </span> is activated, aprox. 5% of the
+								population moves double or triple the steps of the usual population</li>
+						</ul>
+					</li>
+					<li>Modes:
+						<ul class="ulCustom pl-3">
+							<li>
+								<div class="form-check">
+									<label class="form-check-label">
+										<input type="radio" class="form-check-input" name="mode" value="mode1"
+											checked>Mode 1: Every person infects <span class="font-weight-bold">il
+											(infection limit)</span> other persons before he get's healed.
+										This mode does not include time as a factor, therefore a person can just get
+										healed, as long as he finds other persons to infect.//(1. version)
+									</label>
+								</div>
+							</li>
+							<li>
+								<div class="form-check">
+									<label class="form-check-label">
+										<input type="radio" class="form-check-input" name="mode" value="mode2">Mode 2:
+										Every person can infect other persons during <span class="font-weight-bold">ip
+											(incubation period)</span>. After ip his movement s gets to zero, but he can
+										still infect other. After another per period of illness, which is calculated
+										with 50% of ip, a person gets healthy and his movement will be normal
+										again.//(recommended version)
+									</label>
+								</div>
+							</li>
+							<li>
+								<div class="form-check">
+									<label class="form-check-label">
+										<input type="radio" class="form-check-input" name="mode" value="mode3">Mode 3:
+										A hybrid of mode 1 and mode 2. Therefore a person can skip/shorten illness and
+										gets healed, when he reaches il during ip/illness period. Also every
+										infected/ill person recovers the same way like mode 2 calculates.//(testing
+										version)
+									</label>
+								</div>
+							</li>
+						</ul>
+					</li>
+					<li>A dot is calculated with a radius of 1 pixel, which is equivalent of an "area of influence" of
+						1m around each person. For a meeting it is sufficient, if the radiuses are tangent to each
+						other, so the maximum distance between an infection is 2 meter.
+					</li>
+					<li>
+						The graph gets updated every t/100 steps.
+					</li>
+					<li>
+						We support responsive design, the height and width of the animation however is not modifiable.
+						If you are interested, test the app on differenct devices.
+					</li>
+				</ul>
+
+				<form id="myForm" class="form-inline">
+					<div class="input-group mb-2 mr-2 input-group-sm">
+						<div class="input-group-prepend">
+							<span class="input-group-text">h = </span>
+						</div>
+						<input type="number" class="form-control" placeholder="enter height" id="height" readonly>
+					</div>
+
+					<div class="input-group mb-2 mr-2 input-group-sm">
+						<div class="input-group-prepend">
+							<span class="input-group-text">w = </span>
+						</div>
+						<input type="number" class="form-control" placeholder="enter width" id="width" readonly
+							required>
+					</div>
+
+					<div class="input-group mb-2 mr-2 input-group-sm">
+						<div class="input-group-prepend">
+							<span class="input-group-text">a = </span>
+						</div>
+						<input type="number" class="form-control" placeholder="enter area" id="area" readonly>
+					</div>
+
+					<div class="input-group mb-2 mr-2 input-group-sm">
+						<div class="input-group-prepend">
+							<span class="input-group-text">p = </span>
+						</div>
+						<input type="number" class="form-control" placeholder="10 - 15.000" id="population" value="2000"
+							min="10" max="15000">
+					</div>
+
+					<div class="input-group mb-2 mr-2 input-group-sm">
+						<div class="input-group-prepend">
+							<span class="input-group-text">d = </span>
+						</div>
+						<input type="number" class="form-control" placeholder="enter density" id="density" readonly>
+					</div>
+
+					<div class="input-group mb-2 mr-2 input-group-sm">
+						<div class="input-group-prepend">
+							<span class="input-group-text">ir = </span>
+						</div>
+						<input type="number" class="form-control" placeholder="1 - 15" id="infection_rate" value="1"
+							min="1" max="15">
+					</div>
+
+					<div class="input-group mb-2 mr-2 input-group-sm">
+						<div class="input-group-prepend">
+							<span class="input-group-text">t = </span>
+						</div>
+						<input type="number" class="form-control" placeholder="100 - 10.000" id="time" value="2000"
+							min="100" max="10000">
+					</div>
+
+					<div class="input-group mb-2 mr-2 input-group-sm">
+						<div class="input-group-prepend">
+							<span class="input-group-text">s = </span>
+						</div>
+						<input type="number" class="form-control" placeholder="1 - 15" id="steps" value="3" min="1"
+							max="15">
+					</div>
+
+					<div class="input-group mb-2 mr-2 input-group-sm">
+						<div class="input-group-prepend">
+							<span class="input-group-text">il = </span>
+						</div>
+						<input type="number" class="form-control" placeholder="1 - 100" id="infection_limit" value="3"
+							min="1" max="100">
+					</div>
+
+					<div class="input-group mb-2 mr-2 input-group-sm">
+						<div class="input-group-prepend">
+							<span class="input-group-text">ip = </span>
+						</div>
+						<input type="number" class="form-control" placeholder="10 - 200" id="incubation_period"
+							value="75" min="10" max="200">
+					</div>
+
+					<div class="input-group mb-3 mr-2 input-group-sm mt-2">
+						<div class="input-group-prepend">
+							<div class="input-group-text">
+								<input type="checkbox" id="fixed_movement">
+							</div>
+						</div>
+						<input type="text" class="form-control" placeholder="fixed movement" readonly>
+					</div>
+
+					<div class="input-group mb-3 mr-2 input-group-sm mt-2">
+						<div class="input-group-prepend">
+							<div class="input-group-text">
+								<input type="checkbox" id="booster">
+							</div>
+						</div>
+						<input type="text" class="form-control" placeholder="booster" readonly>
+					</div>
+
+					<div class="input-group mb-2 mr-2 input-group-sm">
+						<div class="input-group-prepend">
+							<span class="input-group-text">v<sub>min</sub></span>
+						</div>
+						<input type="range" class="form-control" id="speed" min="1" max="5" value="4">
+						<div class="input-group-append">
+							<span class="input-group-text">v<sub>max</sub></span>
+						</div>
+					</div>
+					</br>
+					<button id="submit_this" type="submit" class="btn btn-primary mb-2 mr-2">Run</button>
+					<button id="reset_this" type="reset" class="btn btn-primary mb-2">Stop/Reset</button>
+				</form>
+
+				<div class="py-3">
+					<span class="fontBgRed font-weight-bold">people infected:</span> <span
+						id="people_infected"></span></br>
+					<span class="fontBgOrange font-weight-bold">people ill:</span> <span id="people_ill"></span></br>
+					<span class="fontBgGreen font-weight-bold">people healed:</span> <span
+						id="people_healed"></span></br>
+					<span class="fontBgGrey font-weight-bold">infections (total):</span> <span
+						id="infections_total"></span></br>
+					time passed: <span id="time_passed"></span></br>
+				</div>
+			</div>
+			<div id="myAnimation" class="col-sm-12 text-center">Animation: <br></div>
+			<div id="myGraph" class="col-sm-12 text-center">Graph: <br></div>
+		</div>
+
+		<div class="modal" id="modal">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h4 class="modal-title"></h4>
+						<button type="button" class="close" data-dismiss="modal">&times;</button>
+					</div>
+					<div class="modal-body">
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<script src="./node_modules/jquery/dist/jquery.min.js"></script>
+	<script src="./node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+	<script src="./node_modules/bootstrap-validator/dist/validator.min.js"></script>
+	<script src="./node_modules/chart.js/dist/Chart.min.js"></script>
+	<script src="src/js/corona.js?version=3.0"></script>
+</body>
+
+</html>
